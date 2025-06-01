@@ -1,0 +1,328 @@
+:root {
+  --dark-background: #0d0d0d; /* Slightly lighter black for main background */
+  --header-bg: #e28413; /* Pure accent-orange for header background */
+  --accent-orange: #e28413;
+  --text-light: #fbf5f3; /* Light cream for primary text */
+  --text-secondary: #cccccc; /* A bit darker for secondary text/captions */
+  --hover-darken: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* Subtle white overlay for darkening effect */
+  --hover-draken-header: #af6913;
+}
+
+body {
+  font-family: "Bookman Old Style", serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--dark-background);
+  color: var(--text-light); /* Default text color is light */
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* --- Header (Now like a content box, sticky) --- */
+.header-wrapper {
+  position: sticky; /* Make wrapper sticky */
+  top: 20px; /* Jarak dari batas atas saat sticky */
+  z-index: 1000;
+  margin: 0 auto 30px auto; /* Margin untuk jarak dari konten pertama */
+  max-width: 800px; /* Sama dengan max-width content-box */
+  padding: 0 20px; /* Padding untuk responsivitas */
+  box-sizing: border-box;
+}
+
+.header {
+  position: relative; /* Make header sticky */
+  top: 0;
+  background-color: var(--header-bg); /* orange background */
+  padding: 10px; /* Vertical padding */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+  z-index: 1000;
+  box-sizing: border-box;
+  /* Remove border-radius and bottom border for a cleaner, block-like header */
+  transition: background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+.header:hover,
+.header:active {
+  background-color: var(--hover-draken-header); /* Darken on hover/active */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+}
+
+.header h1 {
+  color: var(--text-light); /* Judul warna terang */
+  font-size: 22pt; /* Larger for impact */
+  text-align: center;
+  margin: 0 auto; /* Center the h1 within the header */
+  max-width: 800px; /* Limit width to match content boxes */
+  padding: 0 20px; /* Padding for text inside header */
+  letter-spacing: 1.5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Main Content Container */
+.main-content {
+  max-width: 800px; /* Sama dengan lebar h1 di header */
+  margin: 30px auto; /* Margin atas untuk jarak dari header */
+  padding: 0 20px; /* Horizontal padding for content */
+  box-sizing: border-box;
+}
+
+/* Styled Boxes for Points (Blends with background, darkens on interaction) */
+.content-box {
+  background-color: var(--dark-background); /* Same as body background */
+  border-radius: 0px; /* No border radius, make it a sharp rectangle */
+  padding: 30px;
+  margin-bottom: 25px; /* Distance between boxes */
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* No shadow initially */
+  position: relative;
+  color: var(--text-light); /* Text color is light */
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex; /* Use flexbox for vertical centering of text */
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  text-align: center; /* Center text */
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle outline */
+}
+
+/* Darken effect on hover/active */
+.content-box:hover,
+.content-box:active {
+  /* :active for long press on touch devices */
+  background-color: var(--hover-darken); /* Subtle darkening effect */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Add a subtle shadow on hover */
+}
+
+/* Paragraphs and Text inside Boxes */
+.content-box p {
+  margin-bottom: 20px; /* More space below paragraphs */
+  color: var(--text-light);
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  line-height: 1.8; /* Increased line height for readability on dark background */
+  max-width: 90%; /* Limit text width within the box */
+}
+.content-box p:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Numbering */
+ol {
+  list-style: none;
+  counter-reset: my-counter;
+  padding-left: 0;
+}
+
+ol li {
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.content-box::before {
+  content: counter(my-counter) ".";
+  counter-increment: my-counter;
+  font-weight: bold;
+  font-size: 2.5em; /* Very prominent number */
+  color: var(--accent-orange); /* Orange for numbers */
+  margin-bottom: 15px; /* Space below number */
+  display: block; /* Ensure number is on its own line */
+}
+
+/* Image and Caption Container */
+.image-caption-container {
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+  margin-top: 25px; /* Space below text */
+  width: 100%; /* Take full width of parent box */
+  max-width: 600px; /* Limit max width for image/caption block */
+  justify-content: center; /* Center by default for mobile/tablet */
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+/* Image Styling */
+.image-caption-container img {
+  max-width: 100%; /* Responsive */
+  height: auto;
+  display: block;
+  margin: 0; /* Reset default margins */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white border */
+  border-radius: 5px; /* Slightly rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  cursor: zoom-in; /* Indicate image is clickable */
+  transition: transform 0.2s ease-in-out; /* Smooth scale on click */
+}
+
+/* Caption Text */
+.image-caption {
+  font-style: italic;
+  font-size: 0.85em;
+  color: var(--text-secondary); /* Lighter grey for captions */
+  flex-grow: 1; /* Allow caption to take available space */
+  padding-left: 15px; /* Space from image */
+  text-align: left; /* Default align left for desktop */
+  position: relative;
+  align-self: flex-start; /* Align to the top of the flex container */
+  margin-top: 5px; /* Slight adjustment if image starts slightly lower */
+}
+/* --- Image Modal Styles --- */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1001; /* Sit on top */
+  padding-top: 50px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 80%;
+  max-height: 90%;
+  object-fit: contain; /* Ensure image fits without cropping */
+}
+
+.modal-content,
+.caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* Separator Line for Caption */
+.image-caption::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px; /* Adjust vertical position */
+  height: calc(
+    100% - 10px
+  ); /* Height of the line, adjusting for vertical alignment */
+  width: 1px; /* Thickness of the line */
+  background-color: var(--text-secondary); /* Color of the line */
+}
+
+/* Bold text within boxes */
+b {
+  color: var(--accent-orange); /* Bold text in orange for emphasis */
+}
+
+/* Responsive Adjustments */
+@media (min-width: 769px) {
+  /* Desktop styles */
+  .image-caption-container {
+    justify-content: flex-start; /* Align to left for desktop */
+    flex-wrap: nowrap; /* No wrapping for desktop */
+  }
+  .image-caption-container img {
+    width: 40%; /* Image takes 40% width */
+    min-width: 200px; /* Minimum width for image */
+    margin-right: 20px; /* Space between image and caption */
+  }
+  .image-caption {
+    width: 55%; /* Caption takes remaining width */
+    padding-left: 20px; /* More space from line */
+  }
+}
+
+@media (max-width: 768px) {
+  /* Tablet and below */
+  .header h1 {
+    font-size: 22pt;
+    letter-spacing: 1px;
+  }
+  .main-content {
+    padding: 0 15px;
+  }
+  .content-box {
+    padding: 25px;
+    margin-bottom: 20px;
+  }
+  .content-box p {
+    max-width: 95%;
+  }
+  .content-box::before {
+    font-size: 2em;
+  }
+  .image-caption-container {
+    flex-direction: column; /* Stack image and caption vertically */
+    align-items: center; /* Center items */
+    text-align: center; /* Center caption text */
+  }
+  .image-caption-container img {
+    margin-bottom: 15px; /* Space below image */
+    margin-right: 0; /* Remove right margin */
+    max-width: 80%; /* Smaller image on mobile */
+  }
+  .image-caption {
+    padding-left: 40px; /* Remove left padding */
+    margin-top: 10px; /* Space between image and caption */
+  }
+  .image-caption::before {
+    display: none; /* Hide separator line on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mobile */
+  .header {
+    padding: 18px 0;
+  }
+  .header h1 {
+    font-size: 18pt;
+    letter-spacing: 0.8px;
+  }
+  .main-content {
+    margin: 20px auto;
+    padding: 0 10px;
+  }
+  .content-box {
+    padding: 20px;
+    margin-bottom: 15px;
+  }
+  .content-box::before {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+  .content-box p {
+    font-size: 0.95em;
+    max-width: 100%;
+  }
+  .image-caption-container img {
+    max-width: 90%;
+  }
+}
